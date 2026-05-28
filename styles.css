@@ -1,18 +1,21 @@
-/* === colores base === */
+/* === VARIABLES === */
 :root {
-  --black:       #0d0e10;
-  --dark:        #1a1c20;
-  --panel:       #22252b;
-  --accent:      #db9436;
+  --black:  #0d0e10;
+  --dark:   #1a1c20;
+  --panel:  #22252b;
+  --accent: #db9436;
   --accent-dark: #c4861a;
-  --text:        #f0ede8;
-  --muted:       #9a9890;
-  --border:      rgba(255,255,255,0.08);
-  --radius:      4px;
+  --text:   #f0ede8;
+  --muted:  #9a9890;
+  --border: rgba(255,255,255,0.08);
+  --radius: 4px;
+  --accent-bg:     rgba(232,160,32,0.12);
+  --accent-border: rgba(232,160,32,0.25);
+  --condensed: 'Barlow Condensed', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
-/* === fondo === */
+
 body {
   font-family: 'Barlow', sans-serif;
   background-image: url(Imagenes/Fondo.png);
@@ -22,44 +25,75 @@ body {
   overflow-x: hidden;
 }
 
-.fondo {
-  background-image: url(Imagenes/Fondo.png); 
+/* === TIPOGRAFÍA CONDENSED (base reutilizable) === */
+.nav-logo, .footer-logo,
+.nav-links a,
+.section-label, .section-title,
+.hero-tag, .hero-title,
+.service-card h3,
+.contact-block-text h4,
+.form-group label,
+.service-tag,
+.btn-primary, .btn-outline, .form-submit,
+.whatsapp-btn,
+.numeros,
+.form-success h3 {
+  font-family: var(--condensed);
 }
 
-/* === Logo === */
-.nav-logo,
-.footer-logo {
-  font-family: 'Barlow Condensed', sans-serif;
+/* === UPPERCASE + TRACKING (etiquetas, labels, tags) === */
+.section-label,
+.hero-tag,
+.service-tag,
+.service-card h3,
+.contact-block-text h4,
+.form-group label,
+.nav-links a,
+.btn-primary, .btn-outline, .form-submit,
+.whatsapp-btn,
+.descripcion {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* === NAV === */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  height: 64px;
+  background: rgba(13,14,16,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo, .footer-logo {
   font-weight: 900;
   text-decoration: none;
   color: var(--text);
 }
-
-.nav-logo { font-size: 22px; letter-spacing: 0.05em; }
+.nav-logo  { font-size: 22px; letter-spacing: 0.05em; }
 .footer-logo { font-size: 20px; }
-.nav-logo span,
-.footer-logo span { color: var(--accent); }
+.nav-logo span, .footer-logo span { color: var(--accent); }
 
-.nav-links {
-  display: flex;
-  gap: 0.25rem;
-  list-style: none;
-}
-/* === Botonera === */
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+
 .nav-links a {
   display: block;
   padding: 8px 18px;
   border-radius: var(--radius);
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   text-decoration: none;
   color: var(--muted);
   transition: color 0.2s, background 0.2s;
 }
-
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); background: rgba(255,255,255,0.06); }
 
 .hamburger {
   display: none;
@@ -70,25 +104,19 @@ body {
   border: none;
   padding: 4px;
 }
-
 .hamburger span {
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 24px; height: 2px;
   background: var(--text);
   transition: 0.3s;
 }
 
-.btn-primary,
-.form-submit {
-  background: var(--accent);
-  color: var(--black);
+/* === BOTONES === */
+.btn-primary, .btn-outline, .form-submit {
   padding: 14px 32px;
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
@@ -97,56 +125,40 @@ body {
   transition: background 0.2s, transform 0.15s;
 }
 
-.btn-primary:hover,
-.form-submit:hover {
+.btn-primary, .form-submit {
+  background: var(--accent);
+  color: var(--black);
+}
+.btn-primary:hover, .form-submit:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
 }
 
-.form-submit { width: 100%; margin-top: 0.25rem; }
-
 .btn-outline {
   background: transparent;
   color: var(--text);
-  padding: 14px 32px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
   border: 1px solid rgba(255,255,255,0.35);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
   transition: border-color 0.2s, color 0.2s;
 }
-
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-/* === LAYOUT COMPARTIDO === */
-.page-wrapper {
-  padding-top: 64px;
-  min-height: 100vh;
-}
+.form-submit { width: 100%; margin-top: 0.25rem; }
 
-.page-header { padding: 60px 5vw 40px; }
+/* === LAYOUT COMPARTIDO === */
+.page-wrapper { padding-top: 64px; min-height: 100vh; }
+.page-header  { padding: 60px 5vw 40px; }
 
 .section-label {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.6rem;
 }
 
 .section-title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 5vw, 3.5rem);
-  text-transform: uppercase;
   line-height: 1.05;
   margin-bottom: 1rem;
 }
@@ -173,7 +185,6 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 80px 5vw 60px;
-  background: url('fondo.png') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -182,19 +193,13 @@ body {
   background: linear-gradient(105deg, rgba(10,11,14,0.9) 40%, rgba(10,11,14,0.55) 70%, rgba(10,11,14,0.2) 100%);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 680px;
-}
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
 
 .hero-tag {
   display: inline-block;
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 4px 12px;
@@ -203,15 +208,12 @@ body {
 }
 
 .hero-title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
   font-size: clamp(3rem, 9vw, 7rem);
   line-height: 0.95;
-  text-transform: uppercase;
   letter-spacing: -0.01em;
   margin-bottom: 1.25rem;
 }
-
 .hero-title em { font-style: normal; color: var(--accent); display: block; }
 
 .hero-sub {
@@ -234,7 +236,6 @@ body {
 }
 
 .numeros {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   color: var(--accent);
@@ -244,10 +245,22 @@ body {
 .descripcion {
   font-size: 12px;
   color: rgba(154,152,144,0.9);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: 3px;
 }
+
+/* === ÍCONO ACENTO (reutilizable: service-icon, contact-block-icon) === */
+.service-icon, .contact-block-icon {
+  flex-shrink: 0;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-icon      { width: 52px; height: 52px; font-size: 24px; margin-bottom: 1.25rem; }
+.contact-block-icon{ width: 44px; height: 44px; font-size: 18px; }
 
 /* === SERVICIOS === */
 .services-section { background: var(--dark); padding-bottom: 80px; }
@@ -263,32 +276,12 @@ body {
   overflow: hidden;
 }
 
-.service-card {
-  background: var(--dark);
-  padding: 2rem;
-  transition: background 0.2s;
-}
-
+.service-card { background: var(--dark); padding: 2rem; transition: background 0.2s; }
 .service-card:hover { background: var(--panel); }
 
-.service-icon {
-  width: 52px;
-  height: 52px;
-  background: rgba(232,160,32,0.12);
-  border: 1px solid rgba(232,160,32,0.25);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  margin-bottom: 1.25rem;
-}
-
 .service-card h3 {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 20px;
-  text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-bottom: 0.5rem;
 }
@@ -301,12 +294,11 @@ body {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   padding: 3px 10px;
   border-radius: 2px;
-  background: rgba(232,160,32,0.12);
+  background: var(--accent-bg);
   color: var(--accent);
-  border: 1px solid rgba(232,160,32,0.25);
+  border: 1px solid var(--accent-border);
 }
 
 /* === CONTACTO === */
@@ -319,42 +311,18 @@ body {
   padding: 0 5vw;
 }
 
-.contact-block {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  margin-bottom: 1.75rem;
-}
-
-.contact-block-icon {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  background: rgba(232,160,32,0.1);
-  border: 1px solid rgba(232,160,32,0.2);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
+.contact-block { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.75rem; }
 
 .contact-block-text h4 {
   font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
   margin-bottom: 3px;
 }
-
 .contact-block-text p { font-size: 15px; color: var(--text); }
 
-.contact-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 2rem 0;
-}
+.contact-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
 .whatsapp-btn {
   display: flex;
@@ -366,20 +334,16 @@ body {
   cursor: pointer;
   padding: 12px 20px;
   border-radius: var(--radius);
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   width: 100%;
   transition: background 0.2s;
 }
-
 .whatsapp-btn:hover { background: #1ebe5d; }
-
 .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
 
-/* Formulario */
+/* === FORMULARIO === */
 .contact-form {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -387,23 +351,13 @@ body {
   padding: 2.5rem;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 1rem;
-}
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
 
 .form-group label {
   font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
 }
@@ -419,11 +373,10 @@ body {
   font-family: 'Barlow', sans-serif;
   font-size: 15px;
   outline: none;
-  transition: border-color 0.2s;
   width: 100%;
   appearance: none;
+  transition: border-color 0.2s;
 }
-
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus { border-color: var(--accent); }
@@ -434,23 +387,14 @@ body {
 .form-group textarea { resize: vertical; min-height: 110px; }
 .form-group select option { background: var(--black); }
 
-.form-success {
-  display: none;
-  text-align: center;
-  padding: 2.5rem 1rem;
-}
-
+.form-success { display: none; text-align: center; padding: 2.5rem 1rem; }
 .form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
-
 .form-success h3 {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
-
 .form-success p { font-size: 15px; color: var(--muted); }
 
 /* === FOOTER === */
@@ -464,7 +408,6 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
 }
-
 footer p { font-size: 13px; color: var(--muted); }
 
 /* === RESPONSIVE === */
